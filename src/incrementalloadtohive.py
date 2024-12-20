@@ -3,7 +3,7 @@ from pyspark.sql.functions import *
 
 spark = SparkSession.builder.master("local").appName("MiniProj").enableHiveSupport().getOrCreate()
 
-max_vehicle_id = spark.sql("SELECT max(date_stolen) FROM bigdata_nov_2024.stolen_vehicles")
+max_vehicle_id = spark.sql("SELECT max(vehicle_id) FROM bigdata_nov_2024.stolen_vehicles")
 m_vehicle_id = max_vehicle_id.collect()[0][0]
 
 query = 'SELECT * FROM stolen_cars WHERE "date_stolen" > ' + int(m_vehicle_id)
