@@ -12,12 +12,11 @@ password = "WelcomeItc@2022"
 host= "18.132.73.146"
 port = "5432"
 database= "testdb"
-ENCODED_PASSWORD = quote_plus(password)
+#ENCODED_PASSWORD = quote_plus(password)
 
 
 #creating database connectionw string
-connection_string = f"postgresql+psycopg2://{username}:{ENCODED_PASSWORD}@{host}:{port}/{database}"
-
+connection_string = engine = create_engine('postgresql://consultants:WelcomeItc%402022@18.132.73.146:5432/testdb')
 # Establishing connection with engine & database
 try:
     engine = create_engine(connection_string)
