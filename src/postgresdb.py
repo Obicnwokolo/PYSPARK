@@ -30,7 +30,7 @@ except Exception as e:
 #df = pd.read_csv(csv_file_path)
 #print(df)
 
-csv_file_path1 = r'C:\Users\chigb\Downloads\Motor+Vehicle+Thefts+CSV\stolen_vehicles2.csv'
+csv_file_path1 = r'C:\Users\chigb\Downloads\Motor+Vehicle+Thefts+CSV\stolen_vehicles1.csv'
 
 try:
     df1 = pd.read_csv(csv_file_path1)
@@ -54,7 +54,7 @@ except Exception as e:
 #  print("An error occored: {e}")
 
 try:
-    df1.to_sql('stolen_cars2',con=engine, if_exists= 'replace', index= False)
+    df1.to_sql('stolen_cars3',con=engine, if_exists= 'replace', index= False)
     print("Data successfully added to database")
 except Exception as e:
    print("An error occored: {e}")
