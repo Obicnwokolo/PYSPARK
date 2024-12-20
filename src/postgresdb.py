@@ -23,43 +23,43 @@ engine = create_engine(connection_string)
 #cursor = connection_string.cursor()
 
 #----------------------------------------------------------------------------------------------------------------
-csv_file_path = r'C:\Users\chigb\Downloads\Motor+Vehicle+Thefts+CSV\stolen_vehicles1.csv'
-df = pd.read_csv(csv_file_path)
-print(df)
+#csv_file_path = r'C:\Users\chigb\Downloads\Motor+Vehicle+Thefts+CSV\stolen_vehicles1.csv'
+#df = pd.read_csv(csv_file_path)
+#print(df)
 
 csv_file_path1 = r'C:\Users\chigb\Downloads\Motor+Vehicle+Thefts+CSV\stolen_vehicles2.csv'
 df1 = pd.read_csv(csv_file_path1)
 print(df1)
 
-csv_file_path2 = r'C:\Users\chigb\Downloads\Motor+Vehicle+Thefts+CSV\make_details.csv'
-df2 = pd.read_csv(csv_file_path1)
-print(df2)
+#csv_file_path2 = r'C:\Users\chigb\Downloads\Motor+Vehicle+Thefts+CSV\make_details.csv'
+#df2 = pd.read_csv(csv_file_path1)
+#print(df2)
 
-csv_file_path3 = r'C:\Users\chigb\Downloads\Motor+Vehicle+Thefts+CSV\locations.csv'
-df3 = pd.read_csv(csv_file_path2)
-print(df3)
+#csv_file_path3 = r'C:\Users\chigb\Downloads\Motor+Vehicle+Thefts+CSV\locations.csv'
+#df3 = pd.read_csv(csv_file_path2)
+#print(df3)
+
+#try:
+#    df.to_sql('stolen_cars1',con=engine, if_exists= 'replace', index= False)
+#    print("Data successfully added to database")
+#except Exception as e:
+#  print("An error occored: {e}")
 
 try:
-    df.to_sql('stolen_cars1',con=engine, if_exists= 'replace', index= False)
+    df1.to_sql('stolen_cars',con=engine, if_exists= 'replace', index= False)
     print("Data successfully added to database")
 except Exception as e:
+   print("An error occored: {e}")
+
+
+#try:
+#    df2.to_sql('make_details',con=engine, if_exists= 'replace', index= False)
+#    print("Data successfully added to database")
+#except Exception as e:
    print("An error occored: {e}")
 
 #try:
-#    df1.to_sql('stolen_cars',con=engine, if_exists= 'replace', index= False)
-#   print("Data successfully added to database")
+#   df3.to_sql('locations',con=engine, if_exists= 'replace', index= False)
+#    print("Data successfully added to database")
 #except Exception as e:
 #   print("An error occored: {e}")
-
-
-try:
-    df2.to_sql('make_details',con=engine, if_exists= 'replace', index= False)
-    print("Data successfully added to database")
-except Exception as e:
-   print("An error occored: {e}")
-
-try:
-    df3.to_sql('locations',con=engine, if_exists= 'replace', index= False)
-    print("Data successfully added to database")
-except Exception as e:
-   print("An error occored: {e}")
