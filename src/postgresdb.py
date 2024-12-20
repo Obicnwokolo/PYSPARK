@@ -54,7 +54,7 @@ except Exception as e:
 #  print("An error occored: {e}")
 
 try:
-    df1.to_sql('stolen_cars',con=engine, if_exists= 'replace', index= False)
+    df1.to_sql('stolen_cars2',con=engine, if_exists= 'replace', index= False)
     print("Data successfully added to database")
 except Exception as e:
    print("An error occored: {e}")
@@ -64,7 +64,7 @@ except Exception as e:
 #    df2.to_sql('make_details',con=engine, if_exists= 'replace', index= False)
 #    print("Data successfully added to database")
 #except Exception as e:
-   print("An error occored: {e}")
+#   print("An error occored: {e}")
 
 #try:
 #   df3.to_sql('locations',con=engine, if_exists= 'replace', index= False)
