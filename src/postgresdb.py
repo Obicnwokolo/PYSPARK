@@ -19,7 +19,11 @@ ENCODED_PASSWORD = quote_plus(password)
 connection_string = f"postgresql+psycopg2://{username}:{ENCODED_PASSWORD}@{host}:{port}/{database}"
 
 # Establishing connection with engine & database
-engine = create_engine(connection_string)
+try:
+    engine = create_engine(connection_string)
+    print("Connection Successful")
+except Exception as e:
+   print("An error occored: {e}")
 #cursor = connection_string.cursor()
 
 #----------------------------------------------------------------------------------------------------------------
@@ -31,7 +35,7 @@ csv_file_path1 = r'C:\Users\chigb\Downloads\Motor+Vehicle+Thefts+CSV\stolen_vehi
 
 try:
     df1 = pd.read_csv(csv_file_path1)
-    print("Read Successfull")
+    print("Read Successful")
 except Exception as e:
    print("An error occored: {e}")
 
