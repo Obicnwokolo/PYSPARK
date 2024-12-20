@@ -28,8 +28,13 @@ engine = create_engine(connection_string)
 #print(df)
 
 csv_file_path1 = r'C:\Users\chigb\Downloads\Motor+Vehicle+Thefts+CSV\stolen_vehicles2.csv'
-df1 = pd.read_csv(csv_file_path1)
-print(df1)
+
+try:
+    df1 = pd.read_csv(csv_file_path1)
+    print("Read Successfull")
+except Exception as e:
+   print("An error occored: {e}")
+
 
 #csv_file_path2 = r'C:\Users\chigb\Downloads\Motor+Vehicle+Thefts+CSV\make_details.csv'
 #df2 = pd.read_csv(csv_file_path1)
