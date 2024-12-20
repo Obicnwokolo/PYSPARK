@@ -6,9 +6,9 @@ spark = SparkSession.builder.master("local").appName("MiniProj").enableHiveSuppo
 max_vehicle_id = spark.sql("SELECT max(date_stolen) FROM bigdata_nov_2024.stolen_vehicles")
 m_vehicle_id = max_vehicle_id.collect()[0][0]
 
-query = 'SELECT * FROM stolen_vehicles WHERE "date_stolen" > ' + str(m_vehicle_id)
+query = 'SELECT * FROM stolen_cars WHERE "date_stolen" > ' + str(m_vehicle_id)
 
-more_data = spark.read.format("jdbc").option("url", "jdbc:postgresql://18.132.73.146:5432/testdb").option("driver", "org.postgresql.Driver").option("dbtable", "stolen_vehicles").option("user", "consultants").option("password", "WelcomeItc@2022").option("query", query).load()
+more_data = spark.read.format("jdbc").option("url", "jdbc:postgresql://18.132.73.146:5432/testdb").option("driver", "org.postgresql.Driver").option("dbtable", "stolen_cars").option("user", "consultants").option("password", "WelcomeItc@2022").option("query", query).load()
 
 more_data.write.mode("append").saveAsTable("bigdata_nov_2024.stolen_vehicles")
 print("Successfully Load to Hive")
