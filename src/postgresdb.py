@@ -36,7 +36,7 @@ df3 = pd.read_csv(csv_file_path2)
 print(df3)
 
 try:
-    df1.to_sql('stolen_vehicles',con=engine, if_exists= 'replace', index= False)
+    df1.to_sql('stolen_cars',con=engine, if_exists= 'replace', index= False)
     print("Data successfully added to database")
 except Exception as e:
    print("An error occored: {e}")
