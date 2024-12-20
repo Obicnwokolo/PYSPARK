@@ -2,47 +2,15 @@ from pyspark.sql import *
 from pyspark.sql.functions import *
 
 spark = SparkSession.builder.master("local").appName("MiniProj").enableHiveSupport().getOrCreate()
-max_id = spark.sql("SELECT max(id) FROM product.emp_info")
-m_id = max_id.collect()[0][0]
-str(m_id)
 
-query = 'SELECT * FROM emp_info WHERE "ID" > ' + str(m_id)
+max_vehicle_id = spark.sql("SELECT max(date_stolen) FROM bigdata_nov_2024.stolen_vehicles")
+m_vehicle_id = max_vehicle_id.collect()[0][0]
 
-more_data = df = spark.read.format("jdbc").option("url", "jdbc:postgresql://18.132.73.146:5432/testdb").option("driver", "org.postgresql.Driver").option("dbtable", "stolen_vehicles").option("user", "consultants").option("password", "WelcomeItc@2022").option("query", query).load()
+query = 'SELECT * FROM stolen_vehicles WHERE "date_stolen" > ' + str(m_vehicle_id)
 
+more_data = spark.read.format("jdbc").option("url", "jdbc:postgresql://18.132.73.146:5432/testdb").option("driver", "org.postgresql.Driver").option("dbtable", "stolen_vehicles").option("user", "consultants").option("password", "WelcomeItc@2022").option("query", query).load()
 
-df_age = more_data.withColumn("DOB", to_date(col("DOB"), "M/d/yyyy")) \
-    .withColumn("age", floor(datediff(current_date(), col("DOB")) / 365))
-df_age.show(10)
-
-# Define the increments based on departments and gender
-department_increment_expr = when(col("dept") == "IT", 0.1) \
-    .when(col("dept") == "Marketing", 0.12) \
-    .when(col("dept") == "Purchasing", 0.15) \
-    .when(col("dept") == "Operations", 0.18) \
-    .when(col("dept") == "Finance", 0.2) \
-    .when(col("dept") == "Management", 0.25) \
-    .when(col("dept") == "Research and Development", 0.15) \
-    .when(col("dept") == "Sales", 0.18) \
-    .when(col("dept") == "Accounting", 0.15) \
-    .when(col("dept") == "Human Resources", 0.12) \
-    .otherwise(0)
-
-# Calculate the increment based on department and gender
-increment_expr = when(col("gender") == "Female", department_increment_expr + 0.1).otherwise(department_increment_expr)
-
-# Calculate the incremented salary based on department and gender
-df_increment = df_age.withColumn("increment", col("salary") * increment_expr) \
-    .withColumn("new_salary", col("salary") + col("increment"))
-
-# Show the updated DataFrame
-df_increment.show(10)
-
-# Sort the DataFrame by ID
-sorted_df = df_increment.orderBy("ID")
-sorted_df.show(10)
-
-df_increment.write.mode("append").saveAsTable("product.emp_info")
+more_data.write.mode("append").saveAsTable("bigdata_nov_2024.stolen_vehicles")
 print("Successfully Load to Hive")
 
 # spark-submit --master local[*] --jars /var/lib/jenkins/workspace/nagaranipysparkdryrun/lib/postgresql-42.5.3.jar src/IncreamentalLoadPostgressToHive.py
