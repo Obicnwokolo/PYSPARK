@@ -15,14 +15,14 @@ database= "testdb"
 
 
 #creating database connectionw string
-connection_string = engine = create_engine('postgresql://consultants:WelcomeItc%402022@18.132.73.146:5432/testdb')
-# Establishing connection with engine & database
-try:
-    engine = create_engine(connection_string)
-    print("Connection Successful")
-except Exception as e:
-   print("An error occored: {e}")
-#cursor = connection_string.cursor()
+# connection_string = engine = create_engine('postgresql://consultants:WelcomeItc%402022@18.132.73.146:5432/testdb')
+# # Establishing connection with engine & database
+# try:
+#     engine = create_engine(connection_string)
+#     print("Connection Successful")
+# except Exception as e:
+#    print("An error occored: {e}")
+# #cursor = connection_string.cursor()
 #----------------------------------------------------------------------------------------------
 import pandas as pd
 import requests
@@ -57,6 +57,8 @@ df_TimeSeries_data= pd.DataFrame.from_dict(TimeSeries_data, orient="index").rese
 incrdf_TimeSeries_data= df_TimeSeries_data["index"]> max_index
 print("TimeSeries_data:")
 print(df_TimeSeries_data)
+
+incrdf_TimeSeries_data.to_csv("time_series_data2.csv", index=False)
 
 try:
     df_meta_data.to_sql('sop_stock_meta_data',con=engine, if_exists= 'append', index= False)
