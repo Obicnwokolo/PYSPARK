@@ -1,7 +1,6 @@
 import pandas as pd
 import requests
 import sqlalchemy as sa
-import pandas as pd
 
 # importing connection engine pack
 from sqlalchemy import create_engine, inspect, text
@@ -45,14 +44,14 @@ print("TimeSeries_data:")
 print(df_TimeSeries_data)
 
 try:
-    meta_data.to_sql('bitcoin_meta_data',con=engine, if_exists= 'replace', index= False)
+    df_meta_data.to_sql('sop_stock_meta_data',con=engine, if_exists= 'replace', index= False)
     print("Data successfully added to database")
 except Exception as e:
    print("An error occored: {e}")
 
 
 try:
-    TimeSeries_data.to_sql('bitcoin_TimeSeries_data',con=engine, if_exists= 'replace', index= False)
+    df_TimeSeries_data.to_sql('sop_stock_timeSeries_data',con=engine, if_exists= 'replace', index= False)
     print("Data successfully added to database")
 except Exception as e:
    print("An error occored: {e}")
