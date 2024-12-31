@@ -44,9 +44,6 @@ df_TimeSeries_data= pd.DataFrame.from_dict(TimeSeries_data, orient="index").rese
 print("TimeSeries_data:")
 print(df_TimeSeries_data)
 
-df_TimeSeries_data.to_csv("time_series_data.csv", index=False)
-
-
 try:
     meta_data.to_sql('bitcoin_meta_data',con=engine, if_exists= 'replace', index= False)
     print("Data successfully added to database")
